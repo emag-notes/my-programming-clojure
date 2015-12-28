@@ -1,4 +1,5 @@
-(ns examples.sequences)
+(ns examples.sequences
+  (:use clojure.xml clojure.set))
 
 ;(let [m (re-matcher #"\w+" "the quick brown fox")]
 ;  (loop [match (re-find m)]
@@ -14,7 +15,7 @@
   (> (.lastModified file)
      (- (System/currentTimeMillis) (minutes-to-millis 30))))
 
-(:use '[clojure.java.io :only (reader)])
+(use '[clojure.java.io :only (reader)])
 (defn non-blank? [line] (if (re-find #"\S" line) true false))
 
 (defn non-git? [file] (not (.contains (.toString file) ".git")))
@@ -34,3 +35,25 @@
             (parse (java.io.File. "data/sequences/compositions.xml")))
         :when (= :composition (:tag x))]
     (:composer (:attrs x))))
+
+(def song {:name "Agunus Del"
+           :artist "Krzysztof Pendercki"
+           :album "Polish Requiem"
+           :genre "Classical"})
+
+(def languages #{"java" "c" "d" "clojure"})
+(def beverages #{"java" "chai" "pop"})
+
+(def compositions
+  #{{:name "The Art of the Fugue" :composer "J. S. Bach"}
+    {:name "Musical Offering" :composer "J. S. Bach"}
+    {:name "Requiem" :composer "Giuseppe Verdi"}
+    {:name "Requiem" :composer "W. A. Mozart"}})
+(def composers
+  #{{:composer "J. S. Bach" :country "Germany"}
+    {:composer "W. A. Mozart" :country "Austria"}
+    {:composer "Giuseppe Verdi" :country "Italy"}})
+(def nations
+  #{{:nation "Germany" :language "German"}
+    {:nation "Austria" :language "German"}
+    {:nation "Italy" :language "Italian"}})
