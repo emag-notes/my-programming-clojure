@@ -28,3 +28,9 @@
           :when (and (clojure-source? file) (non-git? file))]
       (with-open [rdr (reader file)]
         (count (filter non-blank? (line-seq rdr)))))))
+
+(def composers
+  (for [x (xml-seq
+            (parse (java.io.File. "data/sequences/compositions.xml")))
+        :when (= :composition (:tag x))]
+    (:composer (:attrs x))))
