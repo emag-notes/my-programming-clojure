@@ -12,3 +12,4 @@ pom.xml.asc
 .idea
 *.iml
 messages-backup.clj
+logs
